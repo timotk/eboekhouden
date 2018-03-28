@@ -1,0 +1,9 @@
+pandas
+bs4
+keyring
+keyring_jeepney
+click
+dateparser
+tabulate
+requests
+lxml
