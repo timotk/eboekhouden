@@ -39,7 +39,7 @@ Adding 4.0 hours for 2018-03-28 to "Your Default Project"...
 ### Add 8 hours for tomorrow for project id 1
 ```
 $ ebh add 8 tomorrow --project_id 1
-Adding 8.0 hours for 2018-03-28 to "Your Awesome Project"...
+Adding 8.0 hours for 2018-03-29 to "Your Awesome Project"...
 ```
 
 ### Show hours for this month
@@ -56,6 +56,8 @@ $ ebh list
 Remove hours using the id shown when using the `list` command.
 ```
 $ ebh remove 1393023
+Are you sure you want to remove 8.0 hours for "Your Awesome Project" on 2018-03-28?'[y/N]y
+Removing 8.0 hours for "Your Awesome Project" on 2018-03-28
 ```
 
 ### List your projects
