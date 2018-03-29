@@ -23,6 +23,7 @@ Options:
   --help  Show this message and exit.
 
 Commands:
+  activities  List available activities.
   add       Add hours for a given date.
   list      Show hours for this month.
   projects  List available projects.
