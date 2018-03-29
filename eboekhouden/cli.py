@@ -79,20 +79,27 @@ def projects(ebh):
     click.echo(tabulate(ebh.projects, headers='keys', tablefmt='psql'))
 
 
+@cli.command(name='activities', help='List available activities.')
+@login_required
+def projects(ebh):
+    click.echo(tabulate(ebh.activities, headers='keys', tablefmt='psql'))
+
+
 @cli.command(name='add', help='Add hours for a given date. Defaults to today.')
 @click.argument('hours', type=float)
 @click.argument('date', default='today')
 @click.option('--project_id', type=int, default=None)
+@click.option('--activity_id', type=int, default=None)
 @login_required
-def add(ebh, hours, date, project_id):
+def add(ebh, hours, date, project_id, activity_id):
     if not project_id:
-        project = ebh.get_selected_project()
+        project = ebh.get_selected(ebh.projects)
     else:
         project = [p for p in ebh.projects if p['id'] == project_id][0]
 
     date = dateparser.parse(date).date()
     click.echo('Adding {} hours for {} to "{}"...'.format(hours, date, project['name']))
-    ebh.add_hours(hours, date, project_id=project_id)
+    ebh.add_hours(hours, date, project_id=project_id, activity_id=activity_id)
 
 
 @cli.command(name='remove', help='Remove hours for a given id.')

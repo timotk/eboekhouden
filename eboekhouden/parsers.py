@@ -87,3 +87,29 @@ def parse_projects(raw):
         projects.append(project)
 
     return projects
+
+
+def parse_activities(raw):
+    """
+    Parse the list of activities on eboekhouden overview
+
+    Args:
+        raw (str): raw html
+
+    Returns:
+        list: list of activities dictionaries
+    """
+
+    soup = BeautifulSoup(raw, 'lxml')
+
+    activities_select = soup.find_all('select')[1]
+    activities = []
+    for option in activities_select.find_all('option'):
+        activity = {
+        'id': int(option['value']),
+        'name': option.text,
+        'selected': get_selected(option)
+        }
+        activities.append(activity)
+
+    return activities

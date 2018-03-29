@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 
-from eboekhouden.parsers import parse_hours, parse_projects
+from eboekhouden.parsers import parse_hours, parse_projects, parse_activities
 
 
 class LoginFailedException(Exception):
@@ -34,12 +34,14 @@ class Eboekhouden:
         r = self.session.get(self.base_url + 'uren_ov.asp', params=params)
         return parse_hours(r.content)
 
-    def add_hours(self, hours, date, comment='', project_id=None, activiteit=14458):
+    def add_hours(self, hours, date, comment='', project_id=None, activity_id=None):
         if not project_id:
-            project_id = self.get_selected_project()['id']
+            project_id = self.get_selected(self.projects)['id']
+        if not activity_id:
+            activity_id = self.get_selected(self.activities)['id']
 
         payload = {
-            'SelActiviteit': activiteit,
+            'SelActiviteit': activity_id,
             'SelProject': project_id,
             'submit1': 'Opslaan',
             'txtAantal': hours,
@@ -67,5 +69,14 @@ class Eboekhouden:
             self._projects = parse_projects(r.content)
             return self._projects
 
-    def get_selected_project(self):
-        return [p for p in self.projects if p['selected']][0]
+    @property
+    def activities(self):
+        try:
+            return self._activities
+        except AttributeError:
+            r = self.session.get(self.base_url + 'uren.asp?ACTION=ADDNEW')
+            self._activities = parse_activities(r.content)
+            return self._activities
+
+    def get_selected(self, options):
+        return [option for option in options if option['selected']][0]
