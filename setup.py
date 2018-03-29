@@ -8,7 +8,7 @@ def requirements():
 
 
 setup(name='eboekhouden',
-      version='0.1',
+      version='0.1.1',
       description='eboekhouden.nl from the command line',
       author='Timo',
       license='MIT',
