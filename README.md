@@ -1,6 +1,6 @@
 # eboekhouden-cli
 
-Use [eboekhouden.nl](https://eboekhouden.nl) from the command line.
+Use [eboekhouden.nl](https://eboekhouden.nl) from the command line.   ![](https://img.shields.io/badge/project%20status-works%20on%20my%20computer-ff69b4.svg)
 
 # Install
 
