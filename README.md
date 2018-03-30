@@ -6,7 +6,7 @@ Use [eboekhouden.nl](https://eboekhouden.nl) from the command line.
 
 ```
 git clone https://github.com/timotk/eboekhouden
-cd https://github.com/timotk/eboekhouden
+cd eboekhouden
 python setup.py install
 ```
 
