@@ -40,6 +40,9 @@ def parse_hours(raw):
     html_table = soup.find_all('table')[15]
     df = pd.read_html(io.StringIO(str(html_table)), header=0)[0]
 
+    if len(df) == 0:
+        return pd.DataFrame(columns=['Datum', 'Weekdag', 'Project', 'Activiteit', 'Opmerkingen', 'Aantal uren'])
+
     df['Date'] = pd.to_datetime(df['Datum'], format='%d-%m-%Y')
     df['Datum'] = pd.to_datetime(df['Datum'], format='%d-%m-%Y').dt.date
     df['Weekdag'] = df['Date'].dt.strftime('%A')
