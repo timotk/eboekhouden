@@ -116,3 +116,26 @@ def parse_activities(raw):
         activities.append(activity)
 
     return activities
+
+
+def parse_export(raw):
+    """
+    Parse the exports on eboekhouden overview
+
+    Args:
+        raw (str): raw html
+
+    Returns:
+        str: url to export pdf
+    """
+
+    soup = BeautifulSoup(raw, 'lxml')
+
+    results = {}
+    for a in soup.select('a'):
+        if 'export' in a['href'].lower():
+            filetype = a.select_one('img')['title'].split()[-1]
+            results[filetype] = a['href']
+
+     # if a['alt'].contains('Export')]
+    return results['PDF']

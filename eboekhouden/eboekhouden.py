@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 
-from eboekhouden.parsers import parse_hours, parse_projects, parse_activities
+from eboekhouden.parsers import parse_hours, parse_projects, parse_activities, parse_export
 
 
 class LoginFailedException(Exception):
@@ -59,6 +59,18 @@ class Eboekhouden:
         }
         r = self.session.get(self.base_url + 'uren_ov.asp',
                          params=params)
+
+    def get_pdf_export(self, filename):
+        params = {'dummy': 1,
+                  'ACTION': 'LIST'}
+        r = self.session.get(self.base_url + 'uren_ov.asp', params=params)
+        url = self.base_url + parse_export(r.content)
+
+        response = self.session.get(url)
+        if response.status_code == 200:
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+            return True
 
     @property
     def projects(self):

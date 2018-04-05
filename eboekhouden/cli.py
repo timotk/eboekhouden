@@ -123,5 +123,15 @@ def remove(ebh, hours_id):
         ebh.remove_hours(hours_id)
 
 
+@cli.command(name='export', help='Export PDF for this months hours')
+@click.argument('filename')
+@login_required
+def export(ebh, filename):
+    click.echo('Getting pdf...')
+    result = ebh.get_pdf_export(filename)
+    if result:
+        click.echo('Downloaded pdf export to {}'.format(filename))
+    else:
+        click.echo('Could not download file')
 if __name__ == '__main__':
     cli()
