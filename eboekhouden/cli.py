@@ -90,7 +90,7 @@ def projects(ebh):
 @click.argument('date', default='today')
 @click.option('--project_id', type=int, default=None)
 @click.option('--activity_id', type=int, default=None)
-@click.option('--comment', type=str, default=None)
+@click.option('--comment', type=str, default='')
 @login_required
 def add(ebh, hours, date, project_id, activity_id, comment):
     if not project_id:
