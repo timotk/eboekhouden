@@ -90,8 +90,9 @@ def projects(ebh):
 @click.argument('date', default='today')
 @click.option('--project_id', type=int, default=None)
 @click.option('--activity_id', type=int, default=None)
+@click.option('--comment', type=str, default=None)
 @login_required
-def add(ebh, hours, date, project_id, activity_id):
+def add(ebh, hours, date, project_id, activity_id, comment):
     if not project_id:
         project = ebh.get_selected(ebh.projects)
     else:
@@ -99,7 +100,7 @@ def add(ebh, hours, date, project_id, activity_id):
 
     date = dateparser.parse(date).date()
     click.echo('Adding {} hours for {} to "{}"...'.format(hours, date, project['name']))
-    ebh.add_hours(hours, date, project_id=project_id, activity_id=activity_id)
+    ebh.add_hours(hours, date, project_id=project_id, activity_id=activity_id, comment=comment)
 
 
 @cli.command(name='remove', help='Remove hours for a given id.')
