@@ -43,6 +43,12 @@ $ ebh add --project_id 1893 8 tomorrow
 Adding 8.0 hours for 2018-03-29 to "Your Awesome Project"...
 ```
 
+### Add 8 hours for a specific date
+```
+$ ebh add 8 2018-04-11
+Adding 8.0 hours for 2018-04-11 to "Your Awesome Project"...
+```
+
 ### Show hours for this month
 ```
 $ ebh list
