@@ -31,9 +31,9 @@ Commands:
   setup     Store credentials in system keyring.
 ```
 
-### Add 4 hours to your default project
+### Add 4 hours to your default project with an optional comment
 ```
-$ ebh add 4
+$ ebh add 4 --comment "Worked on project A"
 Adding 4.0 hours for 2018-03-28 to "Your Default Project"...
 ```
 
